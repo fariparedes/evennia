@@ -384,11 +384,15 @@ def iter_to_string(initer, endsep="and", addquote=False):
     if addquote:
         if len(initer) == 1:
             return '"%s"' % initer[0]
-        return ", ".join('"%s"' % v for v in initer[:-1]) + "%s %s" % (endsep, '"%s"' % initer[-1])
+        elif len(initer) == 2:
+            return '"%s"' % ('"%s "' % endsep).join(str(v) for v in initer)
+        return ", ".join('"%s"' % v for v in initer[:-1]) + ",%s %s" % (endsep, '"%s"' % initer[-1])
     else:
         if len(initer) == 1:
             return str(initer[0])
-        return ", ".join(str(v) for v in initer[:-1]) + "%s %s" % (endsep, initer[-1])
+        elif len(initer) == 2:
+            return ("%s " % endsep).join(str(v) for v in initer)
+        return ", ".join(str(v) for v in initer[:-1]) + ",%s %s" % (endsep, initer[-1])
 
 
 # legacy alias
@@ -1844,7 +1848,7 @@ def m_len(target):
     # Would create circular import if in module root.
     from evennia.utils.ansi import ANSI_PARSER
 
-    if inherits_from(target, str) and "|lt" in target:
+    if inherits_from(target, str) and "|le" in target:
         return len(ANSI_PARSER.strip_mxp(target))
     return len(target)
 
