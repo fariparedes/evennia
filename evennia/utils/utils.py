@@ -383,13 +383,13 @@ def iter_to_string(initer, endsep="and", addquote=False):
         if len(initer) == 1:
             return '"%s"' % initer[0]
         elif len(initer) == 2:
-            return '"%s"' % ('" %s "' % endsep).join(str(v) for v in initer)
+            return '"%s"' % ('"%s "' % endsep).join(str(v) for v in initer)
         return ", ".join('"%s"' % v for v in initer[:-1]) + ",%s %s" % (endsep, '"%s"' % initer[-1])
     else:
         if len(initer) == 1:
             return str(initer[0])
         elif len(initer) == 2:
-            return (" %s " % endsep).join(str(v) for v in initer)
+            return ("%s " % endsep).join(str(v) for v in initer)
         return ", ".join(str(v) for v in initer[:-1]) + ",%s %s" % (endsep, initer[-1])
 
 
