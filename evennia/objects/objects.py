@@ -1443,7 +1443,7 @@ class DefaultObject(ObjectDB, metaclass=TypeclassBase):
             }
         )
 
-        location.msg_contents(string, exclude=(self,), mapping=mapping, from_obj=self)
+        location.msg_contents(string, exclude=(self,), from_obj=self, mapping=mapping)
 
     def announce_move_to(self, source_location, msg=None, mapping=None, **kwargs):
         """
@@ -1505,7 +1505,7 @@ class DefaultObject(ObjectDB, metaclass=TypeclassBase):
             }
         )
 
-        destination.msg_contents(string, exclude=(self,), mapping=mapping, from_obj=self)
+        destination.msg_contents(string, exclude=(self,), from_obj=self, mapping=mapping)
 
     def at_after_move(self, source_location, **kwargs):
         """
