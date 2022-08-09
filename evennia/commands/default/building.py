@@ -1061,7 +1061,7 @@ class CmdTunnel(COMMAND_DEFAULT_CLASS):
         exitname, backshort = self.directions[exitshort]
         backname = self.directions[backshort][0]
 
-        # if we recieved a typeclass for the exit, add it to the alias(short name)
+        # if we received a typeclass for the exit, add it to the alias(short name)
         if ":" in self.lhs:
             # limit to only the first : character
             exit_typeclass = ":" + self.lhs.split(":", 1)[-1]
@@ -1647,7 +1647,7 @@ class CmdSetAttribute(ObjManipCommand):
     def split_nested_attr(self, attr):
         """
         Yields tuples of (possible attr name, nested keys on that attr).
-        For performance, this is biased to the deepest match, but allows compatability
+        For performance, this is biased to the deepest match, but allows compatibility
         with older attrs that might have been named with `[]`'s.
 
         > list(split_nested_attr("nested['asdf'][0]"))
@@ -1934,7 +1934,8 @@ class CmdTypeclass(COMMAND_DEFAULT_CLASS):
       update - *only* re-run at_object_creation on this object
               meaning locks or other properties set later may remain.
       reset - clean out *all* the attributes and properties on the
-              object - basically making this a new clean object.
+              object - basically making this a new clean object. This will
+              also reset cmdsets.
       force - change to the typeclass also if the object
               already has a typeclass of the same name.
       list - show available typeclasses. Only typeclasses in modules actually
@@ -2101,7 +2102,7 @@ class CmdTypeclass(COMMAND_DEFAULT_CLASS):
         else:
             update = "update" in self.switches
             reset = "reset" in self.switches
-            hooks = "at_object_creation" if update else "all"
+            hooks = "at_object_creation" if update and not reset else "all"
             old_typeclass_path = obj.typeclass_path
 
             # special prompt for the user in cases where we want
@@ -3490,7 +3491,7 @@ class CmdSpawn(COMMAND_DEFAULT_CLASS):
                 )
                 return
             try:
-                # we homogenize the protoype first, to be more lenient with free-form
+                # we homogenize the prototype first, to be more lenient with free-form
                 protlib.validate_prototype(protlib.homogenize_prototype(prototype))
             except RuntimeError as err:
                 self.caller.msg(str(err))
