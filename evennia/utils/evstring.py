@@ -53,6 +53,19 @@ def strip_markup(text):
     if not hasattr(text, 'clean'):
         text = EvString(text)
     return text.clean()
+	
+def escape_markup(text):
+    """
+    Escapes any Evennia markup in a string to prevent it from being converted to codes.
+
+    Returns:
+        string (str): The raw, escaped string.
+
+    """
+    if hasattr(text, 'raw'):
+        text = text.raw()
+    text = text or ""
+    return text.replace(_MARKUP_CHAR, _MARKUP_CHAR*2)
 
 def strip_mxp(text):
     """
@@ -1023,7 +1036,7 @@ class EvString(str, metaclass=EvStringMeta):
                 else:
                     # text items are zero and even indices, e.g. mod 2 is falsey
                     # this escapes any single, unescaped markup characters left
-                    split_chunk = [EvCode(i, 1) if i == _MARKUP_CHAR else i for i in re.split(f"(\{_MARKUP_CHAR})", text) if i]
+                    split_chunk = [EvCode(i, 1) if i == _MARKUP_CHAR else i for i in re.split(fr"(\{_MARKUP_CHAR})", text) if i]
                     final_chunks += split_chunk
                     # if text:
                     #     final_chunks.append(text)
@@ -1480,18 +1493,3 @@ class EvStringContainer:
         if not hasattr(sep, 'html'):
             sep = EvString(self.sep)
         return sep.html(**kwargs).join([item.html(**kwargs) for item in self.collect_evstring() if item])
-
-
-
-def escape_markup(text):
-    """
-    Escapes any Evennia markup in a string to prevent it from being converted to codes.
-
-    Returns:
-        string (str): The raw, escaped string.
-
-    """
-    if hasattr(text, 'raw'):
-        text = text.raw()
-    text = text or ""
-    return text.replace(_MARKUP_CHAR, _MARKUP_CHAR*2)

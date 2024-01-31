@@ -152,7 +152,7 @@ class CmdNick(COMMAND_DEFAULT_CLASS):
             self.lhs = parts[0].strip()
         else:
             self.lhs, self.rhs = [part.strip() for part in parts]
-        self.lhs = self.lhs.replace("\=", "=")
+        self.lhs = self.lhs.replace(r"\=", "=")
 
     def func(self):
         """Create the nickname"""
