@@ -44,7 +44,7 @@ from django.utils.translation import gettext as _
 from evennia.commands import cmdhandler
 from evennia.commands.cmdset import CmdSet
 from evennia.commands.command import Command
-from evennia.utils.ansi import ANSIString
+from evennia.utils.evstring import EvString
 from evennia.utils.utils import dedent, inherits_from, justify, make_iter
 
 _CMD_NOMATCH = cmdhandler.CMD_NOMATCH
@@ -56,7 +56,7 @@ _SCREEN_HEIGHT = settings.CLIENT_DEFAULT_HEIGHT
 
 _EVTABLE = None
 
-_LBR = ANSIString("\n")
+_LBR = EvString("\n")
 
 # text
 

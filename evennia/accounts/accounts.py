@@ -39,6 +39,7 @@ from evennia.server.throttle import Throttle
 from evennia.typeclasses.attributes import ModelAttributeBackend, NickHandler
 from evennia.typeclasses.models import TypeclassBase
 from evennia.utils import class_from_module, create, logger
+from evennia.utils.evstring import EvString
 from evennia.utils.optionhandler import OptionHandler
 from evennia.utils.utils import is_iter, lazy_property, make_iter, to_str, variable_from_module
 
@@ -378,7 +379,7 @@ class DefaultAccount(AccountDB, metaclass=TypeclassBase):
             str: The name, possibly modified.
 
         """
-        return f"|c{self.key}|n"
+        return EvString(f"|c{self.key}|n")
 
     # session-related methods
 
@@ -1141,12 +1142,12 @@ class DefaultAccount(AccountDB, metaclass=TypeclassBase):
         kwargs["options"] = options
 
         if text is not None:
-            if not (isinstance(text, str) or isinstance(text, tuple)):
-                # sanitize text before sending across the wire
-                try:
-                    text = to_str(text)
-                except Exception:
-                    text = repr(text)
+            # if not (isinstance(text, str) or isinstance(text, tuple)):
+            #     # sanitize text before sending across the wire
+            #     try:
+            #         text = to_str(text)
+            #     except Exception:
+            #         text = repr(text)
             kwargs["text"] = text
 
         # session relay

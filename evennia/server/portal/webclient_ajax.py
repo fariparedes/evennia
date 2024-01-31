@@ -26,8 +26,6 @@ from django.conf import settings
 from django.utils.functional import Promise
 from evennia.server import session
 from evennia.utils import utils
-from evennia.utils.ansi import parse_ansi
-from evennia.utils.text2html import parse_html
 from evennia.utils.utils import class_from_module, ip_from_request, to_bytes
 from twisted.internet.task import LoopingCall
 from twisted.web import resource, server
