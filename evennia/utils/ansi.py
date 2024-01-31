@@ -66,6 +66,7 @@ from collections import OrderedDict
 
 from django.conf import settings
 
+from evennia.server.portal.mxp import mxp_parse
 from evennia.utils import logger, utils
 
 MXP_ENABLED = settings.MXP_ENABLED
@@ -459,7 +460,7 @@ class RenderToANSI(object):
                 link = chunk.data()
                 text = _EVSTRING(link.text, ansi=self).to_ansi()
                 if mxp:
-                    output.append(self.convert_mxp(text, link_type=link.key, link_value=link.link))
+                    output.append(mxp_parse(text))
                 else:
                     output.append(text)
             

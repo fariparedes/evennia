@@ -11,7 +11,6 @@ from collections import namedtuple
 from itertools import pairwise
 from textwrap import TextWrapper
 from django.conf import settings
-from evennia.server.portal.mxp import mxp_parse
 from evennia.utils import logger
 # from evennia.utils.ansi import ANSI_PARSER
 # from evennia.utils.html import HTML_PARSER
