@@ -50,7 +50,6 @@ class Migration(migrations.Migration):
                         help_text="normally view:all().", verbose_name="locks", blank=True
                     ),
                 ),
-                ("db_staff_only", models.BooleanField(default=False)),
                 (
                     "db_tags",
                     models.ManyToManyField(

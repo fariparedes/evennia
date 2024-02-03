@@ -47,10 +47,10 @@ from evennia import Command
 # gender maps
 
 _GENDER_PRONOUN_MAP = {
-    "male": {"s": "he", "o": "him", "p": "his", "a": "his"},
-    "female": {"s": "she", "o": "her", "p": "her", "a": "hers"},
-    "neutral": {"s": "it", "o": "it", "p": "its", "a": "its"},
-    "ambiguous": {"s": "they", "o": "them", "p": "their", "a": "theirs"},
+    "male": {"s": "he", "o": "him", "p": "his", "a": "his", "b": "he's"},
+    "female": {"s": "she", "o": "her", "p": "her", "a": "hers", "b": "she's"},
+    "neutral": {"s": "it", "o": "it", "p": "its", "a": "its", "b": "it's"},
+    "ambiguous": {"s": "they", "o": "them", "p": "their", "a": "theirs", "b": "they're"},
 }
 _RE_GENDER_PRONOUN = re.compile(r"(?<!\|)\|(?!\|)[sSoOpPaA]")
 

@@ -75,9 +75,6 @@ class HelpEntry(SharedMemoryModel):
         blank=True,
         help_text="tags on this object. Tags are simple string markers to identify, group and alias objects.",
     )
-    # (deprecated, only here to allow MUX helpfile load (don't use otherwise)).
-    # TODO: remove this when not needed anymore.
-    db_staff_only = models.BooleanField(default=False)
 
     # Database manager
     objects = HelpEntryManager()

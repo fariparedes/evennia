@@ -265,7 +265,7 @@ import inspect
 from ast import literal_eval
 from fnmatch import fnmatch
 
-from inspect import isfunction, getargspec
+from inspect import isfunction, getfullargspec
 from django.conf import settings
 from evennia import Command, CmdSet
 from evennia.utils import logger
@@ -761,10 +761,11 @@ class EvMenu:
         """
         try:
             try:
-                nargs = len(getargspec(callback).args)
+                nargs = len(getfullargspec(callback).args)
             except TypeError:
                 raise EvMenuError("Callable {} doesn't accept any arguments!".format(callback))
-            supports_kwargs = bool(getargspec(callback).keywords)
+            fullargspec = getfullargspec(callback)
+            supports_kwargs = hasattr(fullargspec, "keywords") and bool(fullargspec.keywords)
             if nargs <= 0:
                 raise EvMenuError("Callable {} doesn't accept any arguments!".format(callback))
 
@@ -1381,7 +1382,7 @@ def list_node(option_generator, select=None, pagesize=10):
             else:
                 if callable(select):
                     try:
-                        if bool(getargspec(select).keywords):
+                        if bool(getfullargspec(select).keywords):
                             return select(caller, selection, available_choices=available_choices)
                         else:
                             return select(caller, selection)
@@ -1457,7 +1458,7 @@ def list_node(option_generator, select=None, pagesize=10):
             # add data from the decorated node
 
             decorated_options = []
-            supports_kwargs = bool(getargspec(func).keywords)
+            supports_kwargs = bool(getfullargspec(func).keywords)
             try:
                 if supports_kwargs:
                     text, decorated_options = func(caller, raw_string, **kwargs)

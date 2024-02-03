@@ -307,7 +307,6 @@ class TextToHTMLparser(object):
         val = (
             r"""<a id="mxplink" href="{url}" target="_blank">{text}</a>""".format(url=url, text=text)
         )
-        print(val)
         return val
 
     def sub_text(self, match):
