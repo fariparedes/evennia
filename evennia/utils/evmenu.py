@@ -764,8 +764,7 @@ class EvMenu:
                 nargs = len(getfullargspec(callback).args)
             except TypeError:
                 raise EvMenuError("Callable {} doesn't accept any arguments!".format(callback))
-            fullargspec = getfullargspec(callback)
-            supports_kwargs = hasattr(fullargspec, "keywords") and bool(fullargspec.keywords)
+            supports_kwargs = bool(getfullargspec(callback).varkw)
             if nargs <= 0:
                 raise EvMenuError("Callable {} doesn't accept any arguments!".format(callback))
 
