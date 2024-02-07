@@ -305,7 +305,6 @@ class ChannelHandler(object):
                 channelcmd
                 for channel, channelcmd in self._cached_channel_cmds.items()
                 if channel.subscriptions.has(source_object)
-                and channelcmd.access(source_object, "send")
             ]
             if chan_cmds:
                 chan_cmdset = cmdset.CmdSet()
