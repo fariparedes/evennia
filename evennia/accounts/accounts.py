@@ -888,7 +888,7 @@ class DefaultAccount(AccountDB, metaclass=TypeclassBase):
                     # this may not be assigned.
                     logger.log_trace()
         try:
-            if not self.at_msg_receive(text=text, **kwargs):
+            if not self.at_msg_receive(text=text, from_obj=from_obj, **kwargs):
                 # abort message to this account
                 return
         except Exception:
